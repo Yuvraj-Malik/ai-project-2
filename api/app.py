@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from tensorflow.keras.models import load_model
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
 CORS(app)
 
 # ---------------------------
@@ -40,11 +40,18 @@ def get_status(rul, uncertainty):
         return "CRITICAL"
 
 # ---------------------------
-# HOME
+# SERVE FRONTEND (REACT APP)
 # ---------------------------
 @app.route('/')
-def home():
-    return "RUL Backend is Running 🚀"
+def serve_index():
+    return app.send_static_file('index.html')
+
+@app.route('/<path:path>')
+def serve_static_or_index(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return app.send_static_file('index.html')
 
 # ---------------------------
 # SERVE PLOTS
@@ -52,6 +59,13 @@ def home():
 @app.route('/plots/<filename>')
 def get_plot(filename):
     return send_from_directory('../plots', filename)
+
+# ---------------------------
+# HEALTH CHECK
+# ---------------------------
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "healthy"}), 200
 
 # ---------------------------
 # DEMO (FOR BROWSER)

@@ -1,7 +1,26 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Environment Variables
+.env
+.env.*
+!.env.example
+
+# Project Specific
 frontend.zip
 TEST.API
 data/processed/*.npy
 data/processed/*.csv
-plots/
+
+# IDE / General
+.DS_Store
+.vscode/
+.idea/
+*.log

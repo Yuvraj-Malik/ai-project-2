@@ -1,6 +1,8 @@
 import PlotCard from '../components/PlotCard'
 
 function EvaluationPage() {
+  const baseUrl = import.meta.env.VITE_API_URL || ''
+  
   // Real metrics computed via 20-pass MC Dropout on 690 test engines
   const metrics = [
     { label: 'Global RMSE', value: '28.80', unit: 'cycles', note: 'Root Mean Squared Error across all 4 domains', tone: 'warning' },
@@ -72,49 +74,49 @@ function EvaluationPage() {
       {/* Diagnostic Plots — 15 total */}
       <section className="dashboard-plots-grid">
         <PlotCard title="Degradation Profile" subtitle="RUL distribution across test engines."
-          imageUrl="http://127.0.0.1:5000/plots/global_test_performance.png"
+          imageUrl={`${baseUrl}/plots/global_test_performance.png`}
           description="Tracks 690 test engines sorted by true RUL. Demonstrates the model's ability to maintain a consistent degradation gradient." />
         <PlotCard title="Domain Accuracy (RMSE)" subtitle="Per-domain error performance."
-          imageUrl="http://127.0.0.1:5000/plots/rmse_per_dataset.png"
+          imageUrl={`${baseUrl}/plots/rmse_per_dataset.png`}
           description="RMSE breakdown per C-MAPSS dataset. FD001 achieves best accuracy (16.60 cycles); FD004 is hardest (33.24 cycles)." />
         <PlotCard title="Uncertainty Tracking" subtitle="MC Dropout confidence intervals."
-          imageUrl="http://127.0.0.1:5000/plots/engine_degradation_uncertainty.png"
+          imageUrl={`${baseUrl}/plots/engine_degradation_uncertainty.png`}
           description="95% confidence bands from 20 MC passes. Bands narrow near failure—improving grounding reliability." />
         <PlotCard title="Error Residuals" subtitle="Prediction error histogram."
-          imageUrl="http://127.0.0.1:5000/plots/error_distribution.png"
+          imageUrl={`${baseUrl}/plots/error_distribution.png`}
           description="Histogram of (Predicted − True) RUL. Near-zero centering (MAE = 20.65) confirms the model is unbiased." />
         <PlotCard title="Correlation Analysis" subtitle="Predicted vs Actual RUL scatter."
-          imageUrl="http://127.0.0.1:5000/plots/pred_vs_actual_scatter.png"
+          imageUrl={`${baseUrl}/plots/pred_vs_actual_scatter.png`}
           description="Scatter plot showing R²=0.672 correlation. Tight clustering along the diagonal confirms non-linear degradation learning." />
         <PlotCard title="Fleet Health State" subtitle="Engine status distribution."
-          imageUrl="http://127.0.0.1:5000/plots/fleet_status_pie.png"
+          imageUrl={`${baseUrl}/plots/fleet_status_pie.png`}
           description="Pie chart categorising 690 engines into Safe, Warning and Critical states based on predicted RUL thresholds." />
         <PlotCard title="Training Loss Curve" subtitle="Model convergence over 50 epochs."
-          imageUrl="http://127.0.0.1:5000/plots/loss_curve.png"
+          imageUrl={`${baseUrl}/plots/loss_curve.png`}
           description="Training vs validation MSE loss over each epoch. Convergence without divergence confirms stable Bi-LSTM training." />
         <PlotCard title="Uncertainty Distribution" subtitle="MC Dropout SD across the fleet."
-          imageUrl="http://127.0.0.1:5000/plots/uncertainty_distribution.png"
+          imageUrl={`${baseUrl}/plots/uncertainty_distribution.png`}
           description="Histogram of per-engine SD values. Mean SD = ±5.62 cycles. Right skew indicates some high-uncertainty edge cases." />
         <PlotCard title="Residuals vs True RUL" subtitle="Error pattern by lifecycle stage."
-          imageUrl="http://127.0.0.1:5000/plots/residuals_vs_true.png"
+          imageUrl={`${baseUrl}/plots/residuals_vs_true.png`}
           description="Shows if error correlates with engine age. Random scatter confirms the model is not biased towards specific lifecycle stages." />
         <PlotCard title="Cumulative RMSE" subtitle="Running RMSE by engine RUL."
-          imageUrl="http://127.0.0.1:5000/plots/cumulative_rmse.png"
+          imageUrl={`${baseUrl}/plots/cumulative_rmse.png`}
           description="Cumulative RMSE as engines are sorted by true RUL. Shows where the model performs best relative to fleet lifecycle stage." />
         <PlotCard title="Sensor Correlation Matrix" subtitle="Inter-sensor correlation heatmap."
-          imageUrl="http://127.0.0.1:5000/plots/sensor_correlation.png"
+          imageUrl={`${baseUrl}/plots/sensor_correlation.png`}
           description="Correlation between 14 key sensors in FD001. Highly correlated clusters guide feature selection and redundancy analysis." />
         <PlotCard title="Engine Lifecycle" subtitle="Full sensor trajectory of Engine #1."
-          imageUrl="http://127.0.0.1:5000/plots/engine_lifecycle.png"
+          imageUrl={`${baseUrl}/plots/engine_lifecycle.png`}
           description="Full degradation trajectory of Engine #1 showing T2, P30, and Nf sensors across all operating cycles until failure." />
         <PlotCard title="Error vs Uncertainty" subtitle="Calibration of stochastic outputs."
-          imageUrl="http://127.0.0.1:5000/plots/rmse_vs_uncertainty.png"
+          imageUrl={`${baseUrl}/plots/rmse_vs_uncertainty.png`}
           description="Scatter of absolute error vs MC Dropout uncertainty coloured by true RUL. Positive correlation confirms uncertainty is a reliable error proxy." />
         <PlotCard title="Domain Error Boxplot" subtitle="Error spread per C-MAPSS regime."
-          imageUrl="http://127.0.0.1:5000/plots/domain_error_boxplot.png"
+          imageUrl={`${baseUrl}/plots/domain_error_boxplot.png`}
           description="Boxplots showing error quartile distribution per domain. FD002 and FD004 show wider spreads due to multi-condition variability." />
         <PlotCard title="Conservative RUL Safety Schedule" subtitle="95% lower-bound maintenance planning."
-          imageUrl="http://127.0.0.1:5000/plots/conservative_rul.png"
+          imageUrl={`${baseUrl}/plots/conservative_rul.png`}
           description="Compares mean RUL vs conservative (Mean − 1.96×SD) RUL. The safety buffer zone ensures grounding before 95% failure probability window." />
       </section>
     </section>

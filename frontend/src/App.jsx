@@ -10,13 +10,25 @@ import PredictPage from './pages/PredictPage'
 import AboutPage from './pages/AboutPage'
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuth, setIsAuth] = useState(() => {
+    return localStorage.getItem('lstm_auth') === 'true'
+  })
+
+  const handleLogin = () => {
+    setIsAuth(true)
+    localStorage.setItem('lstm_auth', 'true')
+  }
+
+  const handleLogout = () => {
+    setIsAuth(false)
+    localStorage.removeItem('lstm_auth')
+  }
 
   if (!isAuth) {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LandingPage onLogin={() => setIsAuth(true)} />} />
+          <Route path="/login" element={<LandingPage onLogin={handleLogin} />} />
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
@@ -25,7 +37,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Shell onLogout={() => setIsAuth(false)}>
+      <Shell onLogout={handleLogout}>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/predict" element={<PredictPage />} />

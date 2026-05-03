@@ -5,3 +5,5 @@ scikit-learn
 tensorflow
 flask
 flask-cors
+waitress
+gunicorn

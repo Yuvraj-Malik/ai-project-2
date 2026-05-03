@@ -6,11 +6,11 @@ function AboutPage() {
   }, [])
 
   const contributors = [
+    { name: 'Abhinav Gupta', roll: '1024030639', group: '2C45', role: 'Project Lead' },
     { name: 'Ishita', roll: '1024030567', group: '2C43', role: 'Data Engineer' },
     { name: 'Pallvi', roll: '1024030578', group: '2C43', role: 'ML Researcher' },
     { name: 'Seerat', roll: '1024030361', group: '2C41', role: 'UI/UX Designer' },
-    { name: 'Yuvraj Malik', roll: '1024030353', group: '2C41', role: 'Backend Developer' },
-    { name: 'Abhinav Gupta', roll: '1024030639', group: '2C45', role: 'Project Lead' }
+    { name: 'Yuvraj Malik', roll: '1024030353', group: '2C41', role: 'Backend Developer' }
   ]
 
   return (
@@ -26,18 +26,9 @@ function AboutPage() {
           cursor: pointer;
         }
         .interactive-card:hover {
-          transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(121, 215, 255, 0.2);
-          border-color: rgba(121, 215, 255, 0.5);
-        }
-        .interactive-card:hover .hover-reveal {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .hover-reveal {
-          opacity: 0;
-          transform: translateY(10px);
-          transition: all 0.3s ease;
+          transform: scale(1.03);
+          box-shadow: 0 0 30px rgba(121, 215, 255, 0.25);
+          border-color: rgba(121, 215, 255, 0.6);
         }
         
         .github-box {
@@ -64,6 +55,16 @@ function AboutPage() {
         }
         .github-box:hover .gh-btn {
           animation: pulseGlow 1.5s infinite;
+        }
+        
+        .aviation-box {
+          transition: all 0.3s ease;
+          border: 1px solid transparent;
+        }
+        .aviation-box:hover {
+          transform: translateX(-5px);
+          border-color: rgba(121, 215, 255, 0.5);
+          box-shadow: -5px 15px 35px rgba(0, 0, 0, 0.3), -5px 0 20px rgba(121, 215, 255, 0.1);
         }
       `}} />
 
@@ -148,7 +149,7 @@ function AboutPage() {
 
       <div className="grid-two">
         {/* Elaborated Details */}
-        <article className="panel info-panel interactive-card">
+        <article className="panel info-panel aviation-box">
           <span className="eyebrow-accent">The Challenge</span>
           <h2>Aviation Reliability</h2>
           <p className="body-copy">
@@ -163,7 +164,7 @@ function AboutPage() {
         </article>
 
         {/* GitHub Repo Box */}
-        <a href="https://github.com/Abhinav-techcode/LSTM-project" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        <a href="https://github.com/Yuvraj-Malik/ai-project-2" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
           <article className="github-box" style={{ height: '100%' }}>
             <div style={{ 
               width: '60px', height: '60px', borderRadius: '50%', 
@@ -204,12 +205,16 @@ function AboutPage() {
         </div>
 
         <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-          gap: '24px'
+          display: 'flex', 
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '24px',
+          maxWidth: '1050px',
+          margin: '0 auto'
         }}>
           {contributors.map((member, index) => (
             <div key={index} className="interactive-card" style={{
+              flex: '0 0 300px',
               background: 'linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
               border: '1px solid rgba(255, 255, 255, 0.08)',
               borderRadius: '24px',
@@ -217,22 +222,10 @@ function AboutPage() {
               position: 'relative',
               overflow: 'hidden'
             }}>
-              <div style={{ 
-                position: 'absolute', 
-                top: '-20px', 
-                right: '-20px', 
-                width: '120px', 
-                height: '120px', 
-                background: index % 2 === 0 ? 'radial-gradient(circle, rgba(121, 215, 255, 0.1) 0%, transparent 70%)' : 'radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
-                borderRadius: '50%'
-              }}></div>
               
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: '1.5rem', color: '#fff', letterSpacing: '0.02em' }}>{member.name}</h3>
-                  <div className="hover-reveal" style={{ color: '#d4af37', fontSize: '0.85rem', marginTop: '4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {member.role}
-                  </div>
+                  <h3 style={{ margin: 0, fontSize: '1.3rem', color: '#fff', letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>{member.name}</h3>
                 </div>
                 <span style={{ 
                   background: 'rgba(255, 255, 255, 0.05)', 
@@ -242,7 +235,8 @@ function AboutPage() {
                   borderRadius: '12px', 
                   fontSize: '0.85rem',
                   fontWeight: 'bold',
-                  letterSpacing: '0.05em'
+                  letterSpacing: '0.05em',
+                  whiteSpace: 'nowrap'
                 }}>
                   Group {member.group}
                 </span>

@@ -1,5 +1,6 @@
 export async function requestPrediction(sliders) {
-  const response = await fetch('http://127.0.0.1:5000/predict', {
+  const baseUrl = import.meta.env.VITE_API_URL || ''
+  const response = await fetch(`${baseUrl}/predict`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -16,7 +17,8 @@ export async function requestPrediction(sliders) {
   return payload
 }
 export async function requestDemoPrediction() {
-  const response = await fetch('http://127.0.0.1:5000/demo')
+  const baseUrl = import.meta.env.VITE_API_URL || ''
+  const response = await fetch(`${baseUrl}/demo`)
   const payload = await response.json().catch(() => ({}))
 
   if (!response.ok) {
@@ -27,6 +29,7 @@ export async function requestDemoPrediction() {
 }
 
 export async function requestHealth() {
-  const response = await fetch('http://127.0.0.1:5000/health')
+  const baseUrl = import.meta.env.VITE_API_URL || ''
+  const response = await fetch(`${baseUrl}/health`)
   return response.ok
 }

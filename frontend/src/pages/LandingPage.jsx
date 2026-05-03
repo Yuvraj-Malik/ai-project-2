@@ -7,11 +7,16 @@ function LandingPage({ onLogin }) {
   const [empId, setEmpId] = useState('')
   const [error, setError] = useState('')
 
+  const TEST_EMAIL = "test@rolls-royce.com"
+  const TEST_PASSWORD = "RR-TEST-2026"
+
   const handleEnter = (e) => {
     e.preventDefault()
-    if (email && empId) {
+    if (email === TEST_EMAIL && empId === TEST_PASSWORD) {
       onLogin()
       navigate('/')
+    } else if (email && empId) {
+      setError('Invalid credentials. Please use the test account provided below.')
     } else {
       setError('Please enter both credentials.')
     }
@@ -83,6 +88,12 @@ function LandingPage({ onLogin }) {
           </div>
 
           {error && <p className="form-error">{error}</p>}
+
+          <div style={{ marginTop: '10px', marginBottom: '20px', padding: '12px', background: 'rgba(121, 215, 255, 0.1)', border: '1px solid rgba(121, 215, 255, 0.3)', borderRadius: '8px', fontSize: '0.85rem', color: '#79d7ff' }}>
+            <strong>Test Credentials for Evaluation:</strong><br/>
+            Email: <span style={{color: '#fff'}}>test@rolls-royce.com</span><br/>
+            Code: <span style={{color: '#fff'}}>RR-TEST-2026</span>
+          </div>
 
           <button type="submit" className="login-submit-btn">
             Access Command Center
