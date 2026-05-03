@@ -1,7 +1,7 @@
 services:
   - type: web
     name: lstm-api
-    env: python
+    runtime: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn api.app:app --bind 0.0.0.0:$PORT --timeout 120"
     envVars:

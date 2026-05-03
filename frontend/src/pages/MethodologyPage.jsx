@@ -34,7 +34,7 @@ function MethodologyPage() {
           <h2>Training Convergence</h2>
           <div className="plot-container" style={{ minHeight: '300px' }}>
             <img 
-              src="http://127.0.0.1:5000/plots/loss_curve.png" 
+              src="/plots/loss_curve.png" 
               alt="Training Loss Curve" 
               className="plot-image" 
             />
@@ -182,14 +182,14 @@ function MethodologyPage() {
         <div className="grid-two" style={{ marginTop: '24px' }}>
           <div className="plot-container" style={{ minHeight: '300px' }}>
             <img 
-              src="http://127.0.0.1:5000/plots/rmse_per_dataset.png" 
+              src="/plots/rmse_per_dataset.png" 
               alt="RMSE per Dataset" 
               className="plot-image" 
             />
           </div>
           <div className="plot-container" style={{ minHeight: '300px' }}>
             <img 
-              src="http://127.0.0.1:5000/plots/engine_degradation_uncertainty.png" 
+              src="/plots/engine_degradation_uncertainty.png" 
               alt="Engine Degradation tracking" 
               className="plot-image" 
             />
