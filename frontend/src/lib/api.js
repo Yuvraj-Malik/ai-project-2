@@ -1,5 +1,5 @@
 export async function requestPrediction(sliders) {
-  const baseUrl = import.meta.env.VITE_API_URL || ''
+  const baseUrl = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
   const response = await fetch(`${baseUrl}/predict`, {
     method: 'POST',
     headers: {

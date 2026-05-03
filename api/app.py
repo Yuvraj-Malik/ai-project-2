@@ -6,7 +6,14 @@ from flask_cors import CORS
 from tensorflow.keras.models import load_model
 
 app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 # ---------------------------
 # LOAD MODEL & SCALERS
@@ -22,7 +29,7 @@ for i in range(1, 5):
             SCALERS[f"FD00{i}"] = pickle.load(f)
 
 SEQ_LENGTH = 30
-MC_SAMPLES = 20 # Monte Carlo samples
+MC_SAMPLES = 5 # Reduced for Render Free Tier stability
 DEFAULT_DOMAIN = "FD001"
 NUM_FEATURES = 108 # Updated to match rolling features count
 
