@@ -2,7 +2,7 @@ numpy
 pandas
 matplotlib
 scikit-learn
-tensorflow
+tensorflow-cpu
 flask
 flask-cors
 waitress
