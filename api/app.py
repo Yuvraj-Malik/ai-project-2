@@ -136,10 +136,13 @@ def predict():
         sequence = scaler.transform(sequence)
         sequence = sequence.reshape(1, SEQ_LENGTH, NUM_FEATURES)
 
-        # FAST BATCHED Monte Carlo Estimation (10x Speedup)
-        # We tile the input to run all 20 passes in a single parallel call
-        batched_sequence = np.tile(sequence, (MC_SAMPLES, 1, 1))
-        preds = model(batched_sequence, training=True).numpy().flatten()
+        # MEMORY-SAFE Monte Carlo Estimation for Render Free Tier (512MB RAM)
+        # Instead of a memory-heavy batched tensor, we loop sequentially.
+        preds = []
+        # Limiting to 10 passes to prevent CPU timeout while maintaining uncertainty distribution
+        for _ in range(min(10, MC_SAMPLES)):
+            preds.append(model(sequence, training=True).numpy()[0][0])
+        preds = np.array(preds)
             
         mean_rul = np.mean(preds)
         std_rul = np.std(preds)
