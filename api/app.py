@@ -29,7 +29,7 @@ for i in range(1, 5):
             SCALERS[f"FD00{i}"] = pickle.load(f)
 
 SEQ_LENGTH = 30
-MC_SAMPLES = 5 # Reduced for Render Free Tier stability
+MC_SAMPLES = 3 # Minimal samples for free tier stability
 DEFAULT_DOMAIN = "FD001"
 NUM_FEATURES = 108 # Updated to match rolling features count
 
