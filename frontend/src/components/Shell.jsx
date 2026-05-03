@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
 
 const navItems = [
+  { to: '/about', label: 'About' },
   { to: '/', label: 'Command Deck' },
   { to: '/predict', label: 'Predict Lab' },
   { to: '/live', label: 'Live Analysis' },

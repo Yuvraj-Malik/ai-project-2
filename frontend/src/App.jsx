@@ -7,6 +7,7 @@ import LandingPage from './pages/LandingPage'
 import LiveAnalysisPage from './pages/LiveAnalysisPage'
 import MethodologyPage from './pages/MethodologyPage'
 import PredictPage from './pages/PredictPage'
+import AboutPage from './pages/AboutPage'
 
 function App() {
   const [isAuth, setIsAuth] = useState(false)
@@ -31,7 +32,8 @@ function App() {
           <Route path="/evaluation" element={<EvaluationPage />} />
           <Route path="/live" element={<LiveAnalysisPage />} />
           <Route path="/methodology" element={<MethodologyPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/about" replace />} />
         </Routes>
       </Shell>
     </BrowserRouter>
