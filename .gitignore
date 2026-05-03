@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+frontend.zip
+TEST.API
+data/processed/*.npy
+data/processed/*.csv
+plots/
